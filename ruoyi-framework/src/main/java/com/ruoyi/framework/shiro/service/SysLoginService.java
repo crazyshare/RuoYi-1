@@ -23,14 +23,14 @@ import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 登录校验方法
- * 
+ *
  * @author ruoyi
  */
 @Component
-public class LoginService
+public class SysLoginService
 {
     @Autowired
-    private PasswordService passwordService;
+    private SysPasswordService passwordService;
 
     @Autowired
     private ISysUserService userService;
@@ -86,13 +86,13 @@ public class LoginService
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.not.exists")));
             throw new UserNotExistsException();
         }
-        
+
         if (UserStatus.DELETED.getCode().equals(user.getDelFlag()))
         {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.password.delete")));
             throw new UserDeleteException();
         }
-        
+
         if (UserStatus.DISABLE.getCode().equals(user.getStatus()))
         {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.blocked", user.getRemark())));

@@ -4,7 +4,7 @@ import com.ruoyi.common.config.Global;
 import com.ruoyi.system.domain.SysMenu;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysMenuService;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,7 +28,7 @@ public class SysIndexController extends BaseController
     public String index(ModelMap mmap)
     {
         // 取身份信息
-        SysUser user = getUser();
+        SysUser user = getSysUser();
         // 根据用户id取出菜单
         List<SysMenu> menus = menuService.selectMenusByUser(user);
         mmap.put("menus", menus);

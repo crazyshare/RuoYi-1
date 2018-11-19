@@ -1,17 +1,19 @@
 package com.ruoyi.quartz.service.impl;
 
-import java.util.List;
-import javax.annotation.PostConstruct;
-import org.quartz.CronTrigger;
-import org.quartz.Scheduler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.mapper.SysJobMapper;
 import com.ruoyi.quartz.service.ISysJobService;
+import com.ruoyi.quartz.util.CronUtils;
 import com.ruoyi.quartz.util.ScheduleUtils;
+import org.quartz.CronTrigger;
+import org.quartz.Scheduler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  * 定时任务调度信息 服务层
@@ -203,5 +205,17 @@ public class SysJobServiceImpl implements ISysJobService
             ScheduleUtils.updateScheduleJob(scheduler, job);
         }
         return rows;
+    }
+
+    /**
+     * 校验cron表达式是否有效
+     *
+     * @param cronExpression 表达式
+     * @return 结果
+     */
+    @Override
+    public boolean checkCronExpressionIsValid(String cronExpression)
+    {
+        return CronUtils.isValid(cronExpression);
     }
 }

@@ -1,16 +1,17 @@
 package com.ruoyi.common.utils;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.apache.commons.lang3.time.DateFormatUtils;
 
 /**
  * 时间工具类
- * 
+ *
  * @author ruoyi
  */
-public class DateUtils
+public class DateUtils extends org.apache.commons.lang3.time.DateUtils
 {
     public static String YYYY = "yyyy";
 
@@ -22,9 +23,14 @@ public class DateUtils
 
     public static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
+    private static String[] parsePatterns = {
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM",
+            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM",
+            "yyyy.MM.dd", "yyyy.MM.dd HH:mm:ss", "yyyy.MM.dd HH:mm", "yyyy.MM"};
+
     /**
      * 获取当前Date型日期
-     * 
+     *
      * @return Date() 当前日期
      */
     public static Date getNowDate()
@@ -34,7 +40,7 @@ public class DateUtils
 
     /**
      * 获取当前日期, 默认格式为yyyy-MM-dd
-     * 
+     *
      * @return String
      */
     public static String getDate()
@@ -95,5 +101,24 @@ public class DateUtils
     {
         Date now = new Date();
         return DateFormatUtils.format(now, "yyyyMMdd");
+    }
+
+    /**
+     * 日期型字符串转化为日期 格式
+     */
+    public static Date parseDate(Object str)
+    {
+        if (str == null)
+        {
+            return null;
+        }
+        try
+        {
+            return parseDate(str.toString(), parsePatterns);
+        }
+        catch (ParseException e)
+        {
+            return null;
+        }
     }
 }

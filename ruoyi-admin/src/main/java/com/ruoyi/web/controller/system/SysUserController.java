@@ -16,14 +16,14 @@ import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.framework.shiro.service.PasswordService;
+import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysPostService;
 import com.ruoyi.system.service.ISysRoleService;
 import com.ruoyi.system.service.ISysUserService;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 
 /**
  * 用户信息
@@ -46,7 +46,7 @@ public class SysUserController extends BaseController
     private ISysPostService postService;
 
     @Autowired
-    private PasswordService passwordService;
+    private SysPasswordService passwordService;
 
     @RequiresPermissions("system:user:view")
     @GetMapping()

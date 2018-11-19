@@ -18,6 +18,7 @@
     <link th:href="@{/ruoyi/css/ry-ui.css?v=3.0.0}" rel="stylesheet"/>
     <style type="text/css">
         .nav > li:hover .dropdown-menu {display: block;}
+        #content-main.max { height: calc(100% - 110px); overflow: hidden; width: 100%; height: 100%; left: 0px; position: absolute; top: 0px; z-index: 9998; margin: 0; }
         .btn-primary { background-color: #20c1dc !important; }
         .btn-primary:hover, .btn-primary:active { background-color: #13b4cf !important; }
     </style>
@@ -111,10 +112,12 @@
                      <li><a class="tabCloseCurrent" href="javascript:void();">关闭当前</a></li>
                      <li><a class="tabCloseOther" href="javascript:void();">关闭其他</a></li>
 					 <li><a class="tabCloseAll" href="javascript:void();">全部关闭</a></li>
+                     <li><a class="tabMaxCurrent" href="javascript:void();">全屏显示</a></li>
                 </ul>
             </div>
             <a href="#" class="roll-nav roll-right tabReload"><i class="fa fa-refresh"></i> 刷新</a>
         </div>
+        <a id="ax_close_max" class="ax_close_max" href="#" title="关闭全屏"> <i class="fa fa-times-circle-o"></i> </a>
         <div class="row mainContent" id="content-main">
             <iframe class="RuoYi_iframe" name="iframe0" width="100%" height="100%" data-id="/system/main"
                     th:src="@{/system/main}" frameborder="0" seamless></iframe>

@@ -1,14 +1,14 @@
-package com.ruoyi.web.core.base;
+package com.ruoyi.framework.web.base;
 
-import java.text.SimpleDateFormat;
+import java.beans.PropertyEditorSupport;
 import java.util.Date;
 import java.util.List;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ruoyi.common.base.AjaxResult;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.page.PageDomain;
@@ -18,7 +18,7 @@ import com.ruoyi.system.domain.SysUser;
 
 /**
  * web层通用数据处理
- * 
+ *
  * @author ruoyi
  */
 public class BaseController
@@ -29,9 +29,15 @@ public class BaseController
     @InitBinder
     public void initBinder(WebDataBinder binder)
     {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+        // Date 类型转换
+        binder.registerCustomEditor(Date.class, new PropertyEditorSupport()
+        {
+            @Override
+            public void setAsText(String text)
+            {
+                setValue(DateUtils.parseDate(text));
+            }
+        });
     }
 
     /**
@@ -64,7 +70,7 @@ public class BaseController
 
     /**
      * 响应返回结果
-     * 
+     *
      * @param rows 影响行数
      * @return 操作结果
      */
@@ -121,23 +127,23 @@ public class BaseController
         return StringUtils.format("redirect:{}", url);
     }
 
-    public SysUser getUser()
+    public SysUser getSysUser()
     {
-        return ShiroUtils.getUser();
+        return ShiroUtils.getSysUser();
     }
 
-    public void setUser(SysUser user)
+    public void setSysUser(SysUser user)
     {
-        ShiroUtils.setUser(user);
+        ShiroUtils.setSysUser(user);
     }
 
     public Long getUserId()
     {
-        return getUser().getUserId();
+        return getSysUser().getUserId();
     }
 
     public String getLoginName()
     {
-        return getUser().getLoginName();
+        return getSysUser().getLoginName();
     }
 }

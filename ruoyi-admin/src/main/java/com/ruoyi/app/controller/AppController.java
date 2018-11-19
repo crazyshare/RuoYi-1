@@ -1,6 +1,6 @@
 package com.ruoyi.app.controller;
 
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
 import org.springframework.stereotype.Controller;
 
 /**

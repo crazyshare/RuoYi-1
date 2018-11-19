@@ -60,7 +60,7 @@ public class DataScopeAspect
             return;
         }
         // 获取当前的用户
-        SysUser currentUser = ShiroUtils.getUser();
+        SysUser currentUser = ShiroUtils.getSysUser();
         if (currentUser != null)
         {
             // 如果是超级管理员，则不过滤数据
@@ -74,7 +74,7 @@ public class DataScopeAspect
     /**
      * 数据范围过滤
      * 
-     * @param da 部门表别名
+     * @param data 部门表别名
      * @return 标准连接条件对象
      */
     public static void dataScopeFilter(JoinPoint joinPoint, SysUser user, String alias)

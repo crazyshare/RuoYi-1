@@ -1,20 +1,21 @@
 package com.ruoyi.framework.shiro.web.filter.online;
 
-import java.io.IOException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.util.WebUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import com.ruoyi.common.constant.ShiroConstants;
 import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.framework.shiro.session.OnlineSession;
 import com.ruoyi.framework.shiro.session.OnlineSessionDAO;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
 
 /**
  * 自定义访问控制
@@ -53,7 +54,7 @@ public class OnlineSessionFilter extends AccessControlFilter
             boolean isGuest = onlineSession.getUserId() == null || onlineSession.getUserId() == 0L;
             if (isGuest == true)
             {
-                SysUser user = ShiroUtils.getUser();
+                SysUser user = ShiroUtils.getSysUser();
                 if (user != null)
                 {
                     onlineSession.setUserId(user.getUserId());

@@ -1,17 +1,5 @@
 package com.ruoyi.framework.aspectj;
 
-import java.lang.reflect.Method;
-import java.util.Map;
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.Signature;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessStatus;
 import com.ruoyi.common.json.JSON;
@@ -22,6 +10,19 @@ import com.ruoyi.framework.util.ServletUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysOperLog;
 import com.ruoyi.system.domain.SysUser;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Method;
+import java.util.Map;
 
 /**
  * 操作日志记录处理
@@ -75,7 +76,7 @@ public class LogAspect
             }
 
             // 获取当前的用户
-            SysUser currentUser = ShiroUtils.getUser();
+            SysUser currentUser = ShiroUtils.getSysUser();
 
             // *========数据库日志=========*//
             SysOperLog operLog = new SysOperLog();

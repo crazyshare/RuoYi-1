@@ -1,7 +1,8 @@
 package com.ruoyi.quartz.service;
 
-import java.util.List;
 import com.ruoyi.quartz.domain.SysJob;
+
+import java.util.List;
 
 /**
  * 定时任务调度信息信息 服务层
@@ -89,4 +90,12 @@ public interface ISysJobService
      * @return 结果
      */
     public int updateJobCron(SysJob job);
+
+    /**
+     * 校验cron表达式是否有效
+     *
+     * @param cronExpression 表达式
+     * @return 结果
+     */
+    public boolean checkCronExpressionIsValid(String cronExpression);
 }

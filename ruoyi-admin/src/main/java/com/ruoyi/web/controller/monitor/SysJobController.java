@@ -1,15 +1,5 @@
 package com.ruoyi.web.controller.monitor;
 
-import java.util.List;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
@@ -18,7 +8,14 @@ import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.service.ISysJobService;
-import com.ruoyi.web.core.base.BaseController;
+import com.ruoyi.framework.web.base.BaseController;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 调度任务信息操作处理
@@ -148,5 +145,15 @@ public class SysJobController extends BaseController
     {
         job.setUpdateBy(ShiroUtils.getLoginName());
         return toAjax(jobService.updateJobCron(job));
+    }
+
+    /**
+     * 校验cron表达式是否有效
+     */
+    @PostMapping("/checkCronExpressionIsValid")
+    @ResponseBody
+    public boolean checkCronExpressionIsValid(SysJob job)
+    {
+        return jobService.checkCronExpressionIsValid(job.getCronExpression());
     }
 }
