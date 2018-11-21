@@ -673,13 +673,6 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
     }
 }
 
-.btn {
-    border-radius: 0px;
-    /*-webkit-border-radius: 0 !important;*/
-    /*-moz-border-radius: 0 !important;*/
-    /*-border-radius: 0 !important;*/
-}
-
 .float-e-margins .btn {
     margin-bottom: 5px;
 }
@@ -978,6 +971,17 @@ button.dim:before {
 button.dim:active:before {
     top: 7px;
     font-size: 50px;
+}
+
+.btn {
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn:focus, .btn:active.focus, .btn.active.focus {
+    outline: none;
+    box-shadow:none;
 }
 
 .label {
