@@ -59,10 +59,10 @@
 	line-height: 400px;
 	background: rgba(0,0,0,0.7);
 }
-.Btnsty_peyton{ float: right;
+.Btnsty_peyton{
+  float: right;
   width: 46px;
   display: inline-block;
-  margin-bottom: 10px;
   height: 37px;
   line-height: 37px;
   font-size: 14px;
@@ -71,7 +71,12 @@
   background-color: #20c1dc;
   text-decoration: none;
   cursor: pointer;
-  border: 0px #fff solid;}
+  border: 0px #fff solid;
+}
+.Btnsty_peyton:hover{
+	background-color: #13b4cf;
+
+}
 /*选择文件上传*/
 .new-contentarea {
 	width: 165px;
