@@ -1,47 +1,23 @@
 package com.ruoyi.common.utils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import org.apache.poi.hssf.usermodel.DVConstraint;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFDataValidation;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.util.CellRangeAddressList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.config.Global;
-import com.ruoyi.common.utils.StringUtils;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Excel相关处理
- * 
+ *
  * @author ruoyi
  */
 public class ExcelUtil<T>
@@ -57,7 +33,7 @@ public class ExcelUtil<T>
 
     /**
      * 对excel表单默认第一个索引名转换成list
-     * 
+     *
      * @param input 输入流
      * @return 转换后集合
      */
@@ -68,7 +44,7 @@ public class ExcelUtil<T>
 
     /**
      * 对excel表单指定表格索引名转换成list
-     * 
+     *
      * @param sheetName 表格索引名
      * @param input 输入流
      * @return 转换后集合
@@ -209,7 +185,7 @@ public class ExcelUtil<T>
 
     /**
      * 对list数据源将其里面的数据导入到excel表单
-     * 
+     *
      * @param list 导出数据集合
      * @param sheetName 工作表的名称
      * @return 结果
@@ -334,31 +310,28 @@ public class ExcelUtil<T>
                                 // 创建cell
                                 cell = row.createCell(j);
                                 cell.setCellStyle(cs);
-                                try
+                                if (vo == null)
                                 {
-                                    if (String.valueOf(field.get(vo)).length() > 10)
-                                    {
-                                        throw new Exception("长度超过10位就不用转数字了");
-                                    }
-                                    // 如果可以转成数字则导出为数字类型
-                                    BigDecimal bc = new BigDecimal(String.valueOf(field.get(vo)));
-                                    cell.setCellType(CellType.NUMERIC);
-                                    cell.setCellValue(bc.doubleValue());
+                                    // 如果数据存在就填入,不存在填入空格.
+                                    cell.setCellValue("");
+                                    continue;
                                 }
-                                catch (Exception e)
+
+                                String dateFormat = attr.dateFormat();
+                                String readConverterExp = attr.readConverterExp();
+                                if (StringUtils.isNotEmpty(dateFormat))
+                                {
+                                    cell.setCellValue(DateUtils.parseDateToStr(dateFormat, (Date) field.get(vo)));
+                                }
+                                else if (StringUtils.isNotEmpty(readConverterExp))
+                                {
+                                    cell.setCellValue(convertByExp(String.valueOf(field.get(vo)), readConverterExp));
+                                }
+                                else
                                 {
                                     cell.setCellType(CellType.STRING);
-                                    if (vo == null)
-                                    {
-                                        // 如果数据存在就填入,不存在填入空格.
-                                        cell.setCellValue("");
-                                    }
-                                    else
-                                    {
-                                        // 如果数据存在就填入,不存在填入空格.
-                                        cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
-                                    }
-
+                                    // 如果数据存在就填入,不存在填入空格.
+                                    cell.setCellValue(field.get(vo) == null ? "" : String.valueOf(field.get(vo)));
                                 }
                             }
                         }
@@ -408,7 +381,7 @@ public class ExcelUtil<T>
 
     /**
      * 设置单元格上提示
-     * 
+     *
      * @param sheet 要设置的sheet.
      * @param promptTitle 标题
      * @param promptContent 内容
@@ -419,7 +392,7 @@ public class ExcelUtil<T>
      * @return 设置好的sheet.
      */
     public static HSSFSheet setHSSFPrompt(HSSFSheet sheet, String promptTitle, String promptContent, int firstRow,
-            int endRow, int firstCol, int endCol)
+                                          int endRow, int firstCol, int endCol)
     {
         // 构造constraint对象
         DVConstraint constraint = DVConstraint.createCustomFormulaConstraint("DD1");
@@ -434,7 +407,7 @@ public class ExcelUtil<T>
 
     /**
      * 设置某些列的值只能输入预制的数据,显示下拉框.
-     * 
+     *
      * @param sheet 要设置的sheet.
      * @param textlist 下拉框显示的内容
      * @param firstRow 开始行
@@ -444,7 +417,7 @@ public class ExcelUtil<T>
      * @return 设置好的sheet.
      */
     public static HSSFSheet setHSSFValidation(HSSFSheet sheet, String[] textlist, int firstRow, int endRow,
-            int firstCol, int endCol)
+                                              int firstCol, int endCol)
     {
         // 加载下拉列表内容
         DVConstraint constraint = DVConstraint.createExplicitListConstraint(textlist);
@@ -454,6 +427,35 @@ public class ExcelUtil<T>
         HSSFDataValidation dataValidationList = new HSSFDataValidation(regions, constraint);
         sheet.addValidationData(dataValidationList);
         return sheet;
+    }
+
+    /**
+     * 解析导出值 0=男,1=女,2=未知
+     *
+     * @param propertyValue 参数值
+     * @param converterExp 翻译注解
+     * @return 解析后值
+     * @throws Exception
+     */
+    public static String convertByExp(String propertyValue, String converterExp) throws Exception
+    {
+        try
+        {
+            String[] convertSource = converterExp.split(",");
+            for (String item : convertSource)
+            {
+                String[] itemArray = item.split("=");
+                if (itemArray[0].equals(propertyValue))
+                {
+                    return itemArray[1];
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        return propertyValue;
     }
 
     /**
@@ -467,7 +469,7 @@ public class ExcelUtil<T>
 
     /**
      * 获取下载路径
-     * 
+     *
      * @param filename 文件名称
      */
     public String getAbsoluteFile(String filename)

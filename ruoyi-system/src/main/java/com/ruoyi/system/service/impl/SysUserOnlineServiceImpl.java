@@ -1,21 +1,23 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.Date;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysUserOnline;
 import com.ruoyi.system.mapper.SysUserOnlineMapper;
+import com.ruoyi.system.service.ISysUserOnlineService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * 在线用户 服务层处理
  * 
  * @author ruoyi
  */
-@Component
-public class SysUserOnlineServiceImpl
+@Service
+public class SysUserOnlineServiceImpl implements ISysUserOnlineService
 {
     @Autowired
     private SysUserOnlineMapper userOnlineDao;
@@ -77,7 +79,7 @@ public class SysUserOnlineServiceImpl
     /**
      * 查询会话集合
      * 
-     * @param pageUtilEntity 分页参数
+     * @param userOnline 在线用户
      */
     public List<SysUserOnline> selectUserOnlineList(SysUserOnline userOnline)
     {
@@ -97,7 +99,7 @@ public class SysUserOnlineServiceImpl
     /**
      * 查询会话集合
      * 
-     * @param online 会话信息
+     * @param expiredDate 过期时间
      */
     public List<SysUserOnline> selectOnlineByExpired(Date expiredDate)
     {

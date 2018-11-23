@@ -1,16 +1,17 @@
 package com.ruoyi.framework.shiro.session;
 
-import java.io.Serializable;
-import java.util.Date;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import com.ruoyi.common.enums.OnlineStatus;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
 import com.ruoyi.system.domain.SysUserOnline;
-import com.ruoyi.system.service.impl.SysUserOnlineServiceImpl;
+import com.ruoyi.system.service.ISysUserOnlineService;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 针对自定义的ShiroSession的db操作
@@ -31,7 +32,7 @@ public class OnlineSessionDAO extends EnterpriseCacheSessionDAO
     private static final String LAST_SYNC_DB_TIMESTAMP = OnlineSessionDAO.class.getName() + "LAST_SYNC_DB_TIMESTAMP";
 
     @Autowired
-    private SysUserOnlineServiceImpl onlineService;
+    private ISysUserOnlineService onlineService;
 
     public OnlineSessionDAO()
     {

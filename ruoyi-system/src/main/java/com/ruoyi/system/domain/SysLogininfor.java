@@ -1,10 +1,11 @@
 package com.ruoyi.system.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import java.util.Date;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.base.BaseEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.Date;
 
 /**
  * 系统访问记录表 sys_logininfor
@@ -24,7 +25,7 @@ public class SysLogininfor extends BaseEntity
     private String loginName;
     
     /** 登录状态 0成功 1失败 */
-    @Excel(name = "登录状态")
+    @Excel(name = "登录状态", readConverterExp = "0=成功,1=失败")
     private String status;
     
     /** 登录IP地址 */
@@ -48,7 +49,7 @@ public class SysLogininfor extends BaseEntity
     private String msg;
     
     /** 访问时间 */
-    @Excel(name = "访问时间")
+    @Excel(name = "访问时间", dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date loginTime;
 
     public Long getInfoId()
