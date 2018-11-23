@@ -1,20 +1,21 @@
 package com.ruoyi.generator.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.apache.velocity.VelocityContext;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.generator.domain.ColumnInfo;
 import com.ruoyi.generator.domain.TableInfo;
+import org.apache.velocity.VelocityContext;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成器 工具类
- * 
+ *
  * @author ruoyi
  */
 public class GenUtils
@@ -23,7 +24,7 @@ public class GenUtils
     private static final String PROJECT_PATH = "main/java/com/ruoyi";
 
     /** mybatis空间路径 */
-    private static final String MYBATIS_PATH = "main/resources/mybatis";
+    private static final String MYBATIS_PATH = "main/resources/mapper";
 
     /** html空间路径 */
     private static final String TEMPLATES_PATH = "main/resources/templates";
@@ -56,7 +57,7 @@ public class GenUtils
 
     /**
      * 获取模板信息
-     * 
+     *
      * @return 模板列表
      */
     public static VelocityContext getVelocityContext(TableInfo table)
@@ -69,8 +70,9 @@ public class GenUtils
         velocityContext.put("primaryKey", table.getPrimaryKey());
         velocityContext.put("className", table.getClassName());
         velocityContext.put("classname", table.getClassname());
-        velocityContext.put("moduleName", GenUtils.getModuleName(packageName));
+        velocityContext.put("moduleName", getModuleName(packageName));
         velocityContext.put("columns", table.getColumns());
+        velocityContext.put("basePackage", getBasePackage(packageName));
         velocityContext.put("package", packageName);
         velocityContext.put("author", Global.getAuthor());
         velocityContext.put("datetime", DateUtils.getDate());
@@ -79,7 +81,7 @@ public class GenUtils
 
     /**
      * 获取模板信息
-     * 
+     *
      * @return 模板列表
      */
     public static List<String> getTemplates()
@@ -144,7 +146,7 @@ public class GenUtils
 
         if (template.contains("ServiceImpl.java.vm"))
         {
-            return javaPath + "service" + "/" + className + "ServiceImpl.java";
+            return javaPath + "service" + "/" + "/impl/" + className + "ServiceImpl.java";
         }
 
         if (template.contains("Controller.java.vm"))
@@ -178,7 +180,7 @@ public class GenUtils
 
     /**
      * 获取模块名
-     * 
+     *
      * @param packageName 包名
      * @return 模块名
      */
@@ -188,6 +190,13 @@ public class GenUtils
         int nameLength = packageName.length();
         String moduleName = StringUtils.substring(packageName, lastIndex + 1, nameLength);
         return moduleName;
+    }
+
+    public static String getBasePackage(String packageName)
+    {
+        int lastIndex = packageName.lastIndexOf(".");
+        String basePackage = StringUtils.substring(packageName, 0, lastIndex);
+        return basePackage;
     }
 
     public static String replaceKeyword(String keyword)
@@ -224,6 +233,6 @@ public class GenUtils
     {
         System.out.println(StringUtils.convertToCamelCase("user_name"));
         System.out.println(replaceKeyword("岗位信息表"));
-        System.out.println(getModuleName("com.ruoyi.system"));
+        System.out.println(getBasePackage("com.ruoyi.system"));
     }
 }
