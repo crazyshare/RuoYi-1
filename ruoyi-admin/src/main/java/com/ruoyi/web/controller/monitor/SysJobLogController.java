@@ -11,16 +11,14 @@ import com.ruoyi.quartz.service.ISysJobLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * 调度日志操作处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -68,7 +66,15 @@ public class SysJobLogController extends BaseController
     {
         return toAjax(jobLogService.deleteJobLogByIds(ids));
     }
-    
+
+    @RequiresPermissions("monitor:job:detail")
+    @GetMapping("/detail/{jobLogId}")
+    public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap)
+    {
+        mmap.put("jobLog", jobLogService.selectJobLogById(jobLogId));
+        return prefix + "/detail";
+    }
+
     @Log(title = "调度日志", businessType = BusinessType.CLEAN)
     @RequiresPermissions("monitor:job:remove")
     @PostMapping("/clean")
