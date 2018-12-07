@@ -1,6 +1,6 @@
 ## 平台简介
 
-基于 [RuoYi](https://gitee.com/y_project/RuoYi) 修改
+基于 [RuoYi](https://gitee.com/y_project/RuoYi)
 
 ## 内置功能
 
@@ -21,16 +21,4 @@
 15. 在线构建器：拖动表单元素生成相应的HTML代码。
 16. 连接池监视：监视当期系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
-## 演示图
-
-<table>
-    <tr>
-        <td><img src="https://github.com/Asening/imgurl/blob/master/RuoYi/01.png?raw=true"/></td>
-        <td><img src="https://github.com/Asening/imgurl/blob/master/RuoYi/02.png?raw=true"/></td>
-    </tr>
-    <tr>
-        <td><img src="https://github.com/Asening/imgurl/blob/master/RuoYi/03.png?raw=true"/></td>
-        <td><img src="https://github.com/Asening/imgurl/blob/master/RuoYi/04.png?raw=true"/></td>
-    </tr>
-</table>
 

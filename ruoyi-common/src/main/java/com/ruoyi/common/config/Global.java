@@ -1,12 +1,13 @@
 package com.ruoyi.common.config;
 
+import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.common.utils.YamlUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.common.utils.YamlUtil;
 
 /**
  * 全局配置类
@@ -86,7 +87,7 @@ public class Global
      */
     public static String getVersion()
     {
-        return StringUtils.nvl(getConfig("ruoyi.version"), "3.0.0");
+        return StringUtils.nvl(getConfig("ruoyi.version"), "1.0.0");
     }
 
     /**

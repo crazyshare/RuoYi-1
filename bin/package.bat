@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [Д©║Ф│╞] Ф┴⌠Е▄┘Е╥╔Г╗▀О╪▄Г■÷Ф┬░jarЕ▄┘Ф√┤Д╩╤Ц─┌
+echo [пео╒] ╢Р╟Э╧╓Ёлё╛иЗЁиjar╟Энд╪Ч║ё
 echo.
 pause
 echo.

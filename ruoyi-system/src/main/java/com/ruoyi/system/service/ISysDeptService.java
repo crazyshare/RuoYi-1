@@ -1,9 +1,10 @@
 package com.ruoyi.system.service;
 
-import java.util.List;
-import java.util.Map;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.domain.SysRole;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 部门管理 服务层
@@ -22,10 +23,11 @@ public interface ISysDeptService
 
     /**
      * 查询部门管理树
-     * 
+     *
+     * @param dept 部门信息
      * @return 所有部门信息
      */
-    public List<Map<String, Object>> selectDeptTree();
+    public List<Map<String, Object>> selectDeptTree(SysDept dept);
 
     /**
      * 根据角色ID查询菜单

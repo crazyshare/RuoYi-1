@@ -1,24 +1,17 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.ruoyi.common.annotation.DataScope;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.system.domain.SysPost;
-import com.ruoyi.system.domain.SysRole;
-import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.domain.SysUserPost;
-import com.ruoyi.system.domain.SysUserRole;
-import com.ruoyi.system.mapper.SysPostMapper;
-import com.ruoyi.system.mapper.SysRoleMapper;
-import com.ruoyi.system.mapper.SysUserMapper;
-import com.ruoyi.system.mapper.SysUserPostMapper;
-import com.ruoyi.system.mapper.SysUserRoleMapper;
+import com.ruoyi.system.domain.*;
+import com.ruoyi.system.mapper.*;
 import com.ruoyi.system.service.ISysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户 业务层处理
@@ -72,7 +65,7 @@ public class SysUserServiceImpl implements ISysUserService
     /**
      * 通过手机号码查询用户
      * 
-     * @param userName 用户名
+     * @param phoneNumber 手机号码
      * @return 用户对象信息
      */
     @Override
@@ -268,7 +261,7 @@ public class SysUserServiceImpl implements ISysUserService
     /**
      * 校验用户名称是否唯一
      *
-     * @param phonenumber 用户名
+     * @param user 用户信息
      * @return
      */
     @Override
@@ -286,7 +279,7 @@ public class SysUserServiceImpl implements ISysUserService
     /**
      * 校验email是否唯一
      *
-     * @param email 用户名
+     * @param user 用户信息
      * @return
      */
     @Override

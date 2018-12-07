@@ -71,6 +71,7 @@ public class SysJobLogController extends BaseController
     @GetMapping("/detail/{jobLogId}")
     public String detail(@PathVariable("jobLogId") Long jobLogId, ModelMap mmap)
     {
+        mmap.put("name", "jobLog");
         mmap.put("jobLog", jobLogService.selectJobLogById(jobLogId));
         return prefix + "/detail";
     }

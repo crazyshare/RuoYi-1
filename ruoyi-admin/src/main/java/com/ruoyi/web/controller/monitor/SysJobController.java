@@ -5,10 +5,10 @@ import com.ruoyi.common.base.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.ExcelUtil;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.framework.web.base.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.service.ISysJobService;
-import com.ruoyi.framework.web.base.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * 调度任务信息操作处理
- * 
+ *
  * @author ruoyi
  */
 @Controller
@@ -75,6 +75,15 @@ public class SysJobController extends BaseController
             e.printStackTrace();
             return error(e.getMessage());
         }
+    }
+
+    @RequiresPermissions("monitor:job:detail")
+    @GetMapping("/detail/{jobId}")
+    public String detail(@PathVariable("jobId") Long jobId, ModelMap mmap)
+    {
+        mmap.put("name", "job");
+        mmap.put("job", jobService.selectJobById(jobId));
+        return prefix + "/detail";
     }
 
     /**

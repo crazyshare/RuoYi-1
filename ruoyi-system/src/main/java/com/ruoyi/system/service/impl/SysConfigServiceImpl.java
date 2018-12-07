@@ -1,14 +1,15 @@
 package com.ruoyi.system.service.impl;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.ruoyi.common.constant.UserConstants;
 import com.ruoyi.common.support.Convert;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.system.domain.SysConfig;
 import com.ruoyi.system.mapper.SysConfigMapper;
 import com.ruoyi.system.service.ISysConfigService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 参数配置 服务层实现
@@ -38,7 +39,7 @@ public class SysConfigServiceImpl implements ISysConfigService
     /**
      * 根据键名查询参数配置信息
      * 
-     * @param configName 参数名称
+     * @param configKey 参数key
      * @return 参数键值
      */
     @Override
@@ -89,7 +90,7 @@ public class SysConfigServiceImpl implements ISysConfigService
     /**
      * 批量删除参数配置对象
      * 
-     * @param configIds 需要删除的数据ID
+     * @param ids 需要删除的数据ID
      * @return 结果
      */
     @Override

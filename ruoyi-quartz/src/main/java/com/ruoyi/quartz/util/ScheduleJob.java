@@ -7,6 +7,7 @@ import com.ruoyi.common.utils.bean.BeanUtils;
 import com.ruoyi.quartz.domain.SysJob;
 import com.ruoyi.quartz.domain.SysJobLog;
 import com.ruoyi.quartz.service.ISysJobLogService;
+import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import java.util.concurrent.Future;
  * @author ruoyi
  *
  */
+@DisallowConcurrentExecution
 public class ScheduleJob extends QuartzJobBean
 {
     private static final Logger log = LoggerFactory.getLogger(ScheduleJob.class);

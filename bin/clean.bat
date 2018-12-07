@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [息] 路
+echo [信息] 清理生成路径。
 echo.
 pause
 echo.

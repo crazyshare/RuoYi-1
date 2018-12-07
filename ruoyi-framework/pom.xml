@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>ruoyi</artifactId>
-        <groupId>com.ruoyi</groupId>
-        <version>3.0</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-	
-    <artifactId>ruoyi-framework</artifactId>
-	
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>ruoyi</artifactId>
+		<groupId>com.ruoyi</groupId>
+		<version>1.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>ruoyi-framework</artifactId>
+
 	<description>
-	    framework框架核心
+		framework框架核心
 	</description>
-    
-    <dependencies>
 
-        <!-- SpringBoot Web容器 -->
-	     <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+	<dependencies>
 
-        <!-- SpringBoot 拦截器 -->
+		<!-- SpringBoot Web容器 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- SpringBoot 拦截器 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
@@ -31,11 +31,11 @@
 
 		<!--阿里数据库连接池 -->
 		<dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-		
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+
 		<!--验证码 -->
 		<dependency>
 			<groupId>com.github.penggle</groupId>
@@ -49,11 +49,11 @@
 			</exclusions>
 		</dependency>
 
-        <!-- SpringBoot集成thymeleaf模板 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+		<!-- SpringBoot集成thymeleaf模板 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 
 		<!--Shiro核心框架 -->
 		<dependency>
@@ -90,26 +90,26 @@
 			<version>${bitwalker.version}</version>
 		</dependency>
 
-        <!-- 系统模块-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-system</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-        
-        <!-- 定时任务-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-quartz</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
-        
-        <!-- 代码生成-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-generator</artifactId>
-            <version>${ruoyi.version}</version>
-        </dependency>
+		<!-- 系统模块-->
+		<dependency>
+			<groupId>com.ruoyi</groupId>
+			<artifactId>ruoyi-system</artifactId>
+			<version>${ruoyi.version}</version>
+		</dependency>
+
+		<!-- 定时任务-->
+		<dependency>
+			<groupId>com.ruoyi</groupId>
+			<artifactId>ruoyi-quartz</artifactId>
+			<version>${ruoyi.version}</version>
+		</dependency>
+
+		<!-- 代码生成-->
+		<dependency>
+			<groupId>com.ruoyi</groupId>
+			<artifactId>ruoyi-generator</artifactId>
+			<version>${ruoyi.version}</version>
+		</dependency>
 
 		<!-- pagehelper 分页插件 -->
 		<dependency>
@@ -118,6 +118,23 @@
 			<version>${pagehelper.boot.version}</version>
 		</dependency>
 
-    </dependencies>
-    
+		<!-- 获取系统信息 -->
+		<dependency>
+			<groupId>com.github.oshi</groupId>
+			<artifactId>oshi-core</artifactId>
+			<version>${oshi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna-platform</artifactId>
+		</dependency>
+
+	</dependencies>
+
 </project>
