@@ -1,19 +1,18 @@
 package com.ruoyi.quartz.util;
 
-import java.lang.reflect.Method;
+import com.ruoyi.common.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
-import com.ruoyi.common.utils.StringUtils;
+
+import java.lang.reflect.Method;
 
 /**
  * 执行定时任务
- * 
- * @author ruoyi
  *
+ * @author ruoyi
  */
-public class ScheduleRunnable implements Runnable
-{
+public class ScheduleRunnable implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(ScheduleRunnable.class);
 
     private Object target;
@@ -21,38 +20,27 @@ public class ScheduleRunnable implements Runnable
     private String params;
 
     public ScheduleRunnable(String beanName, String methodName, String params)
-            throws NoSuchMethodException, SecurityException
-    {
+            throws NoSuchMethodException, SecurityException {
         this.target = SpringContextUtil.getBean(beanName);
         this.params = params;
 
-        if (StringUtils.isNotEmpty(params))
-        {
+        if (StringUtils.isNotEmpty(params)) {
             this.method = target.getClass().getDeclaredMethod(methodName, String.class);
-        }
-        else
-        {
+        } else {
             this.method = target.getClass().getDeclaredMethod(methodName);
         }
     }
 
     @Override
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
             ReflectionUtils.makeAccessible(method);
-            if (StringUtils.isNotEmpty(params))
-            {
+            if (StringUtils.isNotEmpty(params)) {
                 method.invoke(target, params);
-            }
-            else
-            {
+            } else {
                 method.invoke(target);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("执行定时任务  - ：", e);
         }
     }

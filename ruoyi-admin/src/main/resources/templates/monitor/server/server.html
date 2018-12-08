@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+>
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg" id="test">
@@ -236,14 +236,14 @@
 </body>
 <div th:include="include :: footer"></div>
 <script>
-    $(".modal").appendTo("body"), $("[data-toggle=popover]").popover(), $(".collapse-link").click(function() {
+    $(".modal").appendTo("body"), $("[data-toggle=popover]").popover(), $(".collapse-link").click(function () {
         var div_ibox = $(this).closest("div.ibox"),
             e = $(this).find("i"),
             i = div_ibox.find("div.ibox-content");
         i.slideToggle(200),
             e.toggleClass("fa-chevron-up").toggleClass("fa-chevron-down"),
             div_ibox.toggleClass("").toggleClass("border-bottom"),
-            setTimeout(function() {
+            setTimeout(function () {
                 div_ibox.resize();
             }, 50);
     }), $(".close-link").click(function () {
