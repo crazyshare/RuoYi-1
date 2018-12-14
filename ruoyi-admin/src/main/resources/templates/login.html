@@ -10,8 +10,7 @@
     <link href="../static/css/font-awesome.min.css" rel="stylesheet" th:href="@{css/font-awesome.min.css}"/>
     <link href="../static/css/style.css" rel="stylesheet" th:href="@{css/style.css}"/>
     <link href="../static/css/login.css" rel="stylesheet" th:href="@{css/login.css}"/>
-    <link href="../static/ajax/libs/iCheck/custom.css" rel="stylesheet" th:href="@{/ajax/libs/iCheck/custom.css}"/>
-    <link href="../static/ruoyi/css/ry-ui.css" rel="stylesheet" th:href="@{/ruoyi/css/ry-ui.css?v=1.0.0}"/>
+    <link href="../static/ruoyi/css/ry-ui.css" rel="stylesheet" th:href="@{/ruoyi/css/ry-ui.css?v=3.1.0}"/>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -44,9 +43,9 @@
             <form id="signupForm">
                 <h4 class="no-margins">登录：</h4>
                 <p class="m-t-md">欢迎来到管理后台，仅限管理员登录！</p>
-                <input class="form-control uname" name="username" placeholder="用户名" type="text" value="admin"/>
+                <input class="form-control uname" name="username" placeholder="用户名" type="text" value=""/>
                 <input class="form-control pword m-b" name="password" placeholder="密码" type="password"
-                       value="admin123"/>
+                       value=""/>
                 <div class="row" th:if="${captchaEnabled==true}">
                     <div class="col-xs-6">
                         <input class="form-control code" maxlength="5" name="validateCode" placeholder="验证码"
@@ -58,7 +57,9 @@
                         </a>
                     </div>
                 </div>
-                <!--<input class="i-checks" type="checkbox" name="rememberme" />&nbsp;&nbsp;记住我-->
+                <!--<div class="checkbox-custom">-->
+                    <!--<input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>-->
+                <!--</div>-->
                 <button class="btn btn-success btn-block" data-loading="正在验证登录，请稍后..." id="btnSubmit">登录</button>
             </form>
         </div>
@@ -81,9 +82,8 @@
 <script src="../static/ajax/libs/validate/messages_zh.min.js"
         th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
 <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script src="../static/ajax/libs/iCheck/icheck.min.js" th:src="@{/ajax/libs/iCheck/icheck.min.js}"></script>
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-<script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=1.0.0}"></script>
+<script src="../static/ruoyi/js/ry-ui.js" th:src="@{/ruoyi/js/ry-ui.js?v=3.1.0}"></script>
 <script src="../static/ruoyi/login.js" th:src="@{/ruoyi/login.js}"></script>
 </body>
 </html>
